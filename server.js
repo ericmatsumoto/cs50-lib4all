@@ -29,3 +29,23 @@ var server = app.listen(portno, function () {
   var port = server.address().port;
   console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
 });
+
+var mysql = require('mysql');
+
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "webdevin",
+  database: "CS50"
+});
+
+con.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected!");
+  con.query("select link from books where id=1", function (err, result) {
+   if (err) throw err;
+   var link = JSON.parse(JSON.stringify(result, null, 2));
+   console.log("Result: " + JSON.stringify(result, null, 2));
+   console.log(link);
+ });
+});
