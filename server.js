@@ -30,6 +30,17 @@ function getBookDataForBookWithId(id) {
   }
 }
 
+function getBookTitleForBookWithId(id) {
+  con.query("select title from books where id = " + id + ";", function(error, result){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(result[0].title);
+      return result[0].title;
+    }
+  });
+}
+
 app.get('/book/:id', function(request, response) {
   var id = request.params.id;
   var bookText = getBookDataForBookWithId(id)
@@ -40,10 +51,32 @@ app.get('/book/:id', function(request, response) {
   response.end(JSON.stringify({book : bookText, id : id}));
 });
 
+//get book title with given id
+app.get('/book_title/:id', function(request, response) {
+  var id = request.params.id;
+  con.query("select title from books where id = " + id + ";", function(error, result){
+    if (error) {
+      console.log(error);
+      response.end("could not find book with id");
+    } else {
+      console.log(result[0].title);
+      response.end(result[0].title);
+    }
+  });
+})
+
 app.post('/test_database', function(request, response){
   console.log('antyaldfgadf');
+  con.query("select title from books where id = 1;", function(error, result){
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(result);
+    }
+  })
   response.end("wo00000w");
-})
+});
+
 
 var server = app.listen(portno, function () {
   var port = server.address().port;
