@@ -9,20 +9,18 @@ var config = require('config');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "webdevin",
-  database: "CS50"
-});
+var con = mysql.createConnection(config.get('db'));
 var portno = 3000;   // Port number to use
 var app = express();
 app.use(express.static(__dirname));
 
+// Get a list of all the books
 app.get('/', function (request, response) {
-  response.end('Simple web server of files from ' + __dirname);
+  con.query("SELECT id, title, publisher FROM books", function (err, result) {
+    if (err) throw err;
+    response.send(result);
+  });
 });
-
 
 function getBookDataForBookWithId(id) {
   if(id % 2 === 0) {
@@ -94,14 +92,7 @@ var server = app.listen(portno, function () {
  });
 });*/
 
-/*
-// Get a list of all the books
-app.get('/', function (request, response) {
-  con.query("SELECT id, title, publisher FROM books", function (err, result) {
-    if (err) throw err;
-    response.send(result);
-  });
-});
+
 
 function ensureDirectoryExistence(filePath) {
   var dirname = path.dirname(filePath);
@@ -129,5 +120,3 @@ app.get('/download/:id', function (request, response) {
     });
   });
 });
-
-*/
