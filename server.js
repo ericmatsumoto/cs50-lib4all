@@ -4,10 +4,16 @@
  */
 
 var express = require('express');
+var mysql = require('mysql');
+var config = require('config');
+var https = require('https');
+var fs = require('fs');
+var path = require('path');
+//var con = mysql.createConnection(config.get('db'));
+
 var portno = 3000;   // Port number to use
 var app = express();
 app.use(express.static(__dirname));
-
 
 app.get('/', function (request, response) {
   response.end('Simple web server of files from ' + __dirname);
@@ -36,15 +42,6 @@ var server = app.listen(portno, function () {
   console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
 });
 
-/*var mysql = require('mysql');*/
-
-/*var con = mysql.createConnection({
-  host: "10.37.165.93",
-  user: "root",
-  password: "webdevin",
-  database: "CS50"
-});*/
-
 /*con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
@@ -55,3 +52,41 @@ var server = app.listen(portno, function () {
    console.log(link);
  });
 });*/
+
+/*
+// Get a list of all the books
+app.get('/', function (request, response) {
+  con.query("SELECT id, title, publisher FROM books", function (err, result) {
+    if (err) throw err;
+    response.send(result);
+  });
+});
+
+function ensureDirectoryExistence(filePath) {
+  var dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
+}
+
+app.get('/download/:id', function (request, response) {
+  con.query("SELECT path FROM book_assets WHERE book_id = ?", [request.params.id], function (err, result) {
+    if (err) throw err;
+    response.send(result);
+    var path = config.get('localPrefix') + result[0].path;
+    ensureDirectoryExistence(path);
+    var file = fs.createWriteStream(path);
+    var link = config.get('remotePrefix') + result[0].path;
+    https.get(link, function (response) {
+      response.on('data', function (chunk) {
+        file.write(chunk);
+      });
+    }).on('error', function (error) {
+      console.error(error);
+    });
+  });
+});
+
+*/
