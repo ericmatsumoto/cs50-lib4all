@@ -9,8 +9,12 @@ var config = require('config');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
-//var con = mysql.createConnection(config.get('db'));
-
+var con = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "webdevin",
+  database: "CS50"
+});
 var portno = 3000;   // Port number to use
 var app = express();
 app.use(express.static(__dirname));
@@ -36,6 +40,10 @@ app.get('/book/:id', function(request, response) {
   response.end(JSON.stringify({book : bookText, id : id}));
 });
 
+app.post('/test_database', function(request, response){
+  console.log('antyaldfgadf');
+  response.end("wo00000w");
+})
 
 var server = app.listen(portno, function () {
   var port = server.address().port;
