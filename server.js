@@ -61,7 +61,7 @@ app.get('/book_title/:id', function(request, response) {
       response.end(result[0].title);
     }
   });
-})
+});
 
 app.post('/test_database', function(request, response){
   console.log('antyaldfgadf');
@@ -119,4 +119,13 @@ app.get('/download/:id', function (request, response) {
       console.error(error);
     });
   });
+});
+
+
+app.get('/id/:book_title', function(request, response) {
+  if(true) { //if the book exists, return here
+    response.end("{{book data}}");
+  } else { //if the book does not exist, set an error code, and return
+    response.status(404).end("Could not find this book");
+  }
 });
