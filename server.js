@@ -15,7 +15,14 @@ var app = express();
 app.use(express.static(__dirname));
 
 // Get a list of all the books
-app.get('/', function (request, response) {
+app.get('/default', function (request, response) {
+  con.query("SELECT id, title, publisher FROM books", function (err, result) {
+    if (err) throw err;
+    response.send(result);
+  });
+});
+
+app.get('/books', function(request, response) {
   con.query("SELECT id, title, publisher FROM books", function (err, result) {
     if (err) throw err;
     response.send(result);
@@ -106,7 +113,7 @@ function ensureDirectoryExistence(filePath) {
 app.get('/download/:id', function (request, response) {
   con.query("SELECT path FROM book_assets WHERE book_id = ?", [request.params.id], function (err, result) {
     if (err) throw err;
-    response.send(result);
+    response.send(result[0]);
     var path = config.get('localPrefix') + result[0].path;
     ensureDirectoryExistence(path);
     var file = fs.createWriteStream(path);

@@ -1,0 +1,40 @@
+.body {
+	font-family: Geneva;
+}
+
+.search {
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	height: 25px;
+	margin: auto;
+	border-radius: 8px;
+	border: 1px solid lightgrey;
+	outline: none;
+	font-size: 1.05em;
+	padding: 0 3px;
+}
+
+.book-view {
+	list-style-type: none;
+	margin: 6px;
+	padding: 6px;
+	border-radius: 6px;
+	background-color: lightblue;
+}
+
+.book-view:hover {
+	cursor: pointer;
+	background-color: #bfefff;
+}
+
+.book-title {
+	font-weight: bold;
+}
+
+.book-publisher {
+	font-style: italic;
+	color: darkgrey;
+	font-size: 0.9em;
+}
