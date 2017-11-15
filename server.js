@@ -1,7 +1,8 @@
 /*
- * A simple Node.js program for exporting the current working directory via a webserver listing
- * on a hard code (see portno below) port
+ * CS 50 - Library for All
  */
+
+// Modules
 
 var express = require('express');
 var mysql = require('mysql');
@@ -9,21 +10,19 @@ var config = require('config');
 var https = require('https');
 var fs = require('fs');
 var path = require('path');
+
+// Global Variables
 var con = mysql.createConnection(config.get('db'));
 var portno = 3000;   // Port number to use
 var app = express();
+
 app.use(express.static(__dirname));
 
 // Get a list of all the books
-app.get('/default', function (request, response) {
-  con.query("SELECT id, title, publisher FROM books", function (err, result) {
-    if (err) throw err;
-    response.send(result);
-  });
-});
-
 app.get('/books', function(request, response) {
-  con.query("SELECT id, title, publisher FROM books", function (err, result) {
+  con.query('SELECT books.id, books.title, books.publisher, book_covers.path as cover_path \
+    FROM books \
+    JOIN book_covers ON books.id=book_covers.book_id', function (err, result) {
     if (err) throw err;
     response.send(result);
   });
@@ -69,19 +68,6 @@ app.get('/book_title/:id', function(request, response) {
     }
   });
 });
-
-app.post('/test_database', function(request, response){
-  console.log('antyaldfgadf');
-  con.query("select title from books where id = 1;", function(error, result){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(result);
-    }
-  })
-  response.end("wo00000w");
-});
-
 
 var server = app.listen(portno, function () {
   var port = server.address().port;
