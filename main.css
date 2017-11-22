@@ -38,3 +38,30 @@
 	color: darkgrey;
 	font-size: 0.9em;
 }
+
+/* New stuff */
+.cover-view {
+	justify-content: center;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	/*width: 100vh;*/
+	height: 100vh;
+}
+
+.cover-card {
+	width: 200px;
+  	height: 250px;
+  	background-color: #eeeff2;
+  	margin: 15px;
+	position: relative;
+  	/*sflex-shrink: 0;*/
+}
+
+.cover-add-icon {
+	width: auto;
+    height: auto;
+    margin: 0 auto;
+    padding: 10px;
+    position: relative;
+}

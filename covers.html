@@ -1,0 +1,27 @@
+<html ng-app="lib4AllApp" ng-controller="MainController">
+    <head>
+        <title>{{main.title || "Library for All Portal"}}</title>
+
+        <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+        <script src="mainController.js"></script>
+        <script src="node_modules/angular-resource/angular-resource.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+
+    </head>
+
+    <body class="body">
+
+    	<div style="position: relative;">
+            <h2 class="title">Library For All</h2>
+            <input class="search" type="text" ng-model="filter" ng-change="filterBooks()">
+        </div>
+        <div class="cover-view">
+            <div class="cover-card" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
+                <div class="cover-add-icon">+</div>
+                <div class="cover-picture">{{book.cover_path}}</div>
+                <p class="cover-title">{{book.title}}</p>
+            </div>
+
+        </div>
+
+    </body>
