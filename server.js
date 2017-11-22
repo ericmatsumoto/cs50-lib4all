@@ -3,7 +3,6 @@
  */
 
 // Modules
-
 var express = require('express');
 var mysql = require('mysql');
 var config = require('config');
@@ -20,52 +19,45 @@ app.use(express.static(__dirname));
 
 // Get a list of all the books
 app.get('/books', function(request, response) {
-  con.query('SELECT books.id, books.title, books.publisher, book_covers.path as cover_path \
+  con.query('SELECT DISTINCT books.id, books.title, books.publisher, book_covers.path as cover_path \
     FROM books \
     JOIN book_covers ON books.id=book_covers.book_id', function (err, result) {
-    if (err) throw err;
+    if (err) {
+      response.status(500).end(JSON.stringify({error: "SQL error occured while getting books"}));
+      return;
+    }
     response.send(result);
   });
 });
 
-function getBookDataForBookWithId(id) {
-  if(id % 2 === 0) {
-    return "Hello this is the text for book " + id
-  }
-}
-
-function getBookTitleForBookWithId(id) {
-  con.query("select title from books where id = " + id + ";", function(error, result){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(result[0].title);
-      return result[0].title;
-    }
-  });
-}
-
-app.get('/book/:id', function(request, response) {
+app.get('/books/:id', function(request, response) {
   var id = request.params.id;
-  var bookText = getBookDataForBookWithId(id)
-  if(!bookText) {
-    response.status(404).end("Book with id " + id + " does not exist");
-    return;
-  }
-  response.end(JSON.stringify({book : bookText, id : id}));
+  con.query('SELECT books.id, books.title, books.publisher, book_covers.path as cover_path \
+  FROM books \
+  JOIN book_covers ON books.id=book_covers.book_id WHERE books.id = ?', [id], function(error, result) {
+    if (error || result.length === 0) {
+      console.log(error);
+      response.status(404).end(JSON.stringify({error: "Book with id " + id + " does not exist"}));
+      return;
+    }
+
+    console.log(result[0]);
+    response.send(result[0]);
+  });
 });
 
 //get book title with given id
 app.get('/book_title/:id', function(request, response) {
   var id = request.params.id;
-  con.query("select title from books where id = " + id + ";", function(error, result){
+  con.query("SELECT title FROM books WHERE id = ?", [id], function(error, result) {
     if (error) {
       console.log(error);
-      response.end("could not find book with id");
-    } else {
-      console.log(result[0].title);
-      response.end(result[0].title);
+      response.status(404).end(JSON.stringify({error: "could not find book with specified id"}));
+      return;
     }
+
+    console.log(result[0].title);
+    response.send({title: result[0].title});
   });
 });
 
@@ -73,19 +65,6 @@ var server = app.listen(portno, function () {
   var port = server.address().port;
   console.log('Listening at http://localhost:' + port + ' exporting the directory ' + __dirname);
 });
-
-/*con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  con.query("select link from books where id=1", function (err, result) {
-   if (err) throw err;
-   var link = JSON.parse(JSON.stringify(result, null, 2));
-   console.log("Result: " + JSON.stringify(result, null, 2));
-   console.log(link);
- });
-});*/
-
-
 
 function ensureDirectoryExistence(filePath) {
   var dirname = path.dirname(filePath);
@@ -98,9 +77,13 @@ function ensureDirectoryExistence(filePath) {
 
 app.get('/download/:id', function (request, response) {
   con.query("SELECT path FROM book_assets WHERE book_id = ?", [request.params.id], function (err, result) {
-    if (err) throw err;
+    if (err) {
+      response.status(500).end(JSON.stringify({error: "SQL error when querying book"}));
+      return;
+    }
     response.send(result[0]);
-    var path = config.get('localPrefix') + result[0].path;
+    // save book to ./resources/{book.id}.epub
+    var path = config.get('localPrefix') + result[0].path.split('/').pop();
     ensureDirectoryExistence(path);
     var file = fs.createWriteStream(path);
     var link = config.get('remotePrefix') + result[0].path;
@@ -114,11 +97,38 @@ app.get('/download/:id', function (request, response) {
   });
 });
 
+app.get('/books/by_title/:title', function(request, response) {
+  var title = request.params.title;
+  con.query('SELECT DISTINCT books.id, books.title, books.publisher, book_covers.path as cover_path \
+  FROM books \
+  JOIN book_covers ON books.id=book_covers.book_id WHERE books.title LIKE ?', ['%' + title + '%'], function(error, result) {
+    if (error) {
+      console.log(error);
+      response.status(500).end(JSON.stringify({error: "SQL error occured."}));
+      return;
+    }
 
-app.get('/id/:book_title', function(request, response) {
-  if(true) { //if the book exists, return here
-    response.end("{{book data}}");
-  } else { //if the book does not exist, set an error code, and return
-    response.status(404).end("Could not find this book");
-  }
+    console.log(result);
+    response.send(result);
+  });
+});
+
+app.get('/downloaded_books', function(request, response) {
+  fs.readdir(config.get('localPrefix'), (err, files) => {
+    var ids = files.map(function (fileName) {
+      return path.parse(fileName).name;
+    });
+    con.query('SELECT DISTINCT books.id, books.title, books.publisher, book_covers.path as cover_path \
+    FROM books \
+    JOIN book_covers ON books.id=book_covers.book_id WHERE books.id IN ?', [[ids]], function(error, result) {
+      if (error) {
+        console.log(error);
+        response.status(500).end(JSON.stringify({error: "SQL error occured."}));
+        return;
+      }
+  
+      console.log(result);
+      response.send(result);
+    });
+  })
 });
