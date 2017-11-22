@@ -54,14 +54,25 @@
   	height: 250px;
   	background-color: #eeeff2;
   	margin: 15px;
-	position: relative;
+		position: relative;
   	/*sflex-shrink: 0;*/
 }
 
 .cover-add-icon {
-	width: auto;
-    height: auto;
-    margin: 0 auto;
-    padding: 10px;
-    position: relative;
+		width: 100%;
+		background: pink;
+		/*border: solid 1px red;*/
+		height: 100%;
+    margin: auto;
+		opacity: 0;
+		font-size: 6em;
+		text-align: center;
+		line-height: 250px;
+    /*padding: 10px;*/
+    position: absolute;
+}
+
+.cover-add-icon:hover {
+	cursor: pointer;
+	opacity: 0.5;
 }
