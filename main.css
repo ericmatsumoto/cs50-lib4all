@@ -2,6 +2,14 @@
 	font-family: Geneva;
 }
 
+.title {
+	font-family: 'Lobster', cursive;
+	margin: auto;
+	/*position: absolute;*/
+	text-align: center;
+	font-size: 3em;
+}
+
 .search {
 	position: absolute;
 	right: 0;
@@ -52,27 +60,46 @@
 .cover-card {
 	width: 200px;
   	height: 250px;
-  	background-color: #eeeff2;
+  	/*background-color: #eeeff2;*/
+  	background-color: white;
   	margin: 15px;
+  	border: solid 1px silver;
 		position: relative;
   	/*sflex-shrink: 0;*/
 }
 
+.cover-title {
+	white-space: pre;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: 'Work Sans', sans-serif;
+	color:black;
+	margin: 10px 4px;
+	text-align: center;
+}
+
 .cover-add-icon {
 		width: 100%;
-		background: pink;
+		background: #d3d3d3;
 		/*border: solid 1px red;*/
 		height: 100%;
-    margin: auto;
+    	margin: auto;
 		opacity: 0;
 		font-size: 6em;
 		text-align: center;
-		line-height: 250px;
+		line-height: 235px;
     /*padding: 10px;*/
     position: absolute;
 }
 
 .cover-add-icon:hover {
 	cursor: pointer;
-	opacity: 0.5;
+	opacity: 0.65;
+}
+
+.cover-picture {
+	width: 100%;
+	height: 85%;
+	/*-webkit-clip-path: polygon(0 0, 100% 0%, 100% 83%, 0 83%);
+	clip-path: polygon(0 0, 100% 0%, 100% 83%, 0 83%);*/
 }

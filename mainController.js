@@ -7,7 +7,8 @@ lib4AllApp.controller('MainController', ['$scope', '$resource',
         var resource = $resource("/books");
         $scope.books = resource.query();
         $scope.currentBooks = $scope.books;
-        $scope.filter = ""
+        $scope.filter = "";
+        $scope.coverPrefix = "https://books.libraryforall.org/assets/";
 
         $scope.downloadBook = function(id) {
         	var downloadResource = $resource("/download/" + id);

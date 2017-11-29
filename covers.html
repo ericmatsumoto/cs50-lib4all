@@ -1,5 +1,10 @@
 <html ng-app="lib4AllApp" ng-controller="MainController">
     <head>
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet"> -->
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Work+Sans:200');
+        </style>
         <title>{{main.title || "Library for All Portal"}}</title>
 
         <script type="text/javascript" src="node_modules/angular/angular.js"></script>
@@ -18,7 +23,7 @@
         <div class="cover-view">
             <div class="cover-card" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
                 <div class="cover-add-icon">+</div>
-                <div class="cover-picture">{{book.cover_path}}</div>
+                <img class="cover-picture" ng-src="https://books.libraryforall.org/assets/{{book.cover_path}}">
                 <p class="cover-title">{{book.title}}</p>
             </div>
 
