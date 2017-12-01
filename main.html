@@ -1,6 +1,7 @@
-<!-- <html ng-app="lib4AllApp" ng-controller="MainController">
+<html ng-app="lib4AllApp" ng-controller="MainController">
     <head>
         <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet"> -->
         <style>
             @import url('https://fonts.googleapis.com/css?family=Work+Sans:200');
         </style>
@@ -13,21 +14,20 @@
         <script src="node_modules/angular-route/angular-route.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css" />
 
-    </head> -->
-<!--
-    <body class="body"> -->
+    </head>
 
-    	<!-- <div style="position: relative;">
+    <body class="body">
+
+    	<div style="position: relative;">
             <h2 class="title">Library For All</h2>
             <input class="search" type="text" placeholder="Search" ng-model="filter" ng-change="filterBooks()">
             <button class="button" ng-click="changeView()">{{buttonTitle}}</button>
-        </div> -->
-        <div class="cover-view">
-            <div class="cover-card" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
-                <div class="cover-add-icon">+</div>
-                <img class="cover-picture" ng-src="https://books.libraryforall.org/assets/{{book.cover_path}}">
-                <p class="cover-title">{{book.title}}</p>
-            </div>
         </div>
 
-    <!-- </body> -->
+        <div class="container">
+            <md-content flex id="content">
+                <div ng-view></div>
+            </md-content>
+        </div>
+
+    </body>

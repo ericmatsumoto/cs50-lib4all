@@ -1,11 +1,27 @@
-var lib4AllApp = angular.module('lib4AllApp', ['ngResource']);
+var lib4AllApp = angular.module('lib4AllApp', ['ngRoute', 'ngResource']);
+
+lib4AllApp.config(['$routeProvider',
+    function ($routeProvider) {
+        $routeProvider.
+            when('/books', {
+                templateUrl: 'books.html',
+                controller: 'MainController'
+            }).
+            when('/covers', {
+                templateUrl: 'covers.html',
+                controller: 'MainController'
+            }).
+            otherwise({
+                redirectTo: '/main'
+            });
+    }]);
 
 
-lib4AllApp.controller('MainController', ['$scope', '$resource',
+lib4AllApp.controller('MainController', ['$scope', '$resource', '$routeParams',
     function ($scope, $resource) {
 
-        var downloadedBooksResource = $resource('/downloaded_books')
-        $scope.downloadedBooks = downloadedBooksResource.query()
+        var downloadedBooksResource = $resource('/downloaded_books');
+        $scope.downloadedBooks = downloadedBooksResource.query();
 
 
         var resource = $resource("/books");
@@ -21,7 +37,7 @@ lib4AllApp.controller('MainController', ['$scope', '$resource',
         	var res = downloadResource.get();
 
             var getBookResource = $resource("/books/" + id);
-            var book = getBookResource.get()
+            var book = getBookResource.get();
             $scope.downloadedBooks.push(book);
 
 

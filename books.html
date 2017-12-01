@@ -1,24 +1,26 @@
-<html ng-app="lib4AllApp" ng-controller="MainController">
+<!-- <html ng-app="lib4AllApp" ng-controller="MainController">
     <head>
         <title>{{main.title || "Library for All Portal"}}</title>
+
 
         <script type="text/javascript" src="node_modules/angular/angular.js"></script>
         <script src="mainController.js"></script>
         <script src="node_modules/angular-resource/angular-resource.js"></script>
+        <script src="node_modules/angular-route/angular-route.js"></script>
         <link rel="stylesheet" type="text/css" href="main.css" />
 
-    </head>
+    </head> -->
+<!-- 
+    <body class="body"> -->
 
-    <body class="body">
-
-    	<div style="position: relative;">
+    	<!-- <div style="position: relative;">
             <h2 class="title">Library For All</h2>
             <input class="search" type="text" placeholder="Search" ng-model="filter" ng-change="filterBooks()">
             <button class="button" ng-click="changeView()">Change</button>
-        </div>
+        </div> -->
         <div class="book-view" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
             <p class="book-title">{{book.title}}</p>
             <p class="book-publisher">{{book.publisher}}</p>
         </div>
 
-    </body>
+    <!-- </body> -->
