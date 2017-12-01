@@ -4,6 +4,10 @@ var lib4AllApp = angular.module('lib4AllApp', ['ngResource']);
 lib4AllApp.controller('MainController', ['$scope', '$resource',
     function ($scope, $resource) {
 
+        var downloadedBooksResource = $resource('/downloaded_books')
+        $scope.downloadedBooks = downloadedBooksResource.query()
+        
+
         var resource = $resource("/books");
         $scope.books = resource.query();
         $scope.currentBooks = $scope.books;
