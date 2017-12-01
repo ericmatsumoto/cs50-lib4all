@@ -10,10 +10,11 @@
     </head>
 
     <body class="body">
-    	
+
     	<div style="position: relative;">
             <h2 class="title">Library For All</h2>
-            <input class="search" type="text" ng-model="filter" ng-change="filterBooks()">
+            <input class="search" type="text" placeholder="Search" ng-model="filter" ng-change="filterBooks()">
+            <button class="button" ng-click="changeView()">Change</button>
         </div>
         <div class="book-view" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
             <p class="book-title">{{book.title}}</p>
