@@ -3,13 +3,13 @@ var lib4AllApp = angular.module('lib4AllApp', ['ngRoute', 'ngResource']);
 lib4AllApp.config(['$routeProvider',
     function ($routeProvider) {
         $routeProvider.
-            when('/books', {
-                templateUrl: 'books.html',
-                controller: 'MainController'
+            when('/catalog', {
+                templateUrl: 'catalog.html',
+                controller: 'CatalogController'
             }).
-            when('/covers', {
-                templateUrl: 'covers.html',
-                controller: 'MainController'
+            when('/library', {
+                templateUrl: 'library.html',
+                controller: 'LibraryController'
             }).
             otherwise({
                 redirectTo: '/main'
@@ -17,12 +17,14 @@ lib4AllApp.config(['$routeProvider',
     }]);
 
 
-lib4AllApp.controller('MainController', ['$scope', '$resource', '$routeParams',
-    function ($scope, $resource) {
+lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
+    function ($scope, $resource, $location) {
 
         var downloadedBooksResource = $resource('/downloaded_books');
         $scope.downloadedBooks = downloadedBooksResource.query();
 
+
+        $scope.showCovers = true;
 
         var resource = $resource("/books");
         $scope.allBooks = resource.query();
@@ -65,10 +67,12 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$routeParams',
                 $scope.currentBooks = $scope.downloadedBooks
                 showingAllBooks = false;
                 $scope.buttonTitle = "Full Catalog";
+                $location.path('/library');
             } else {
                 $scope.currentBooks = $scope.allBooks
                 showingAllBooks = true;
                 $scope.buttonTitle = "My Downloaded Books";
+                $location.path('/catalog');
             }
 
         }
