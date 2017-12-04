@@ -83,7 +83,7 @@ app.get('/download/:id', function (request, response) {
     }
     response.send(result[0]);
     // save book to ./resources/{book.id}.epub
-    var path = config.get('localPrefix') + result[0].path.split('/').pop();
+    var path = config.get('localPrefix') + request.params.id + '.' + result[0].path.split('/').pop().split('.').pop();
     ensureDirectoryExistence(path);
     var file = fs.createWriteStream(path);
     var link = config.get('remotePrefix') + result[0].path;

@@ -1,11 +1,11 @@
 <div ng-if="showCovers" class="cover-view">
-    <div class="cover-card" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
+    <div class="cover-card" ng-repeat="book in allBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
         <div class="cover-add-icon">+</div>
         <img class="cover-picture" ng-src="https://books.libraryforall.org/assets/{{book.cover_path}}">
         <p class="cover-title">{{book.title}}</p>
     </div>
 </div>
-<div ng-if="!showCovers" class="book-view" ng-repeat="book in currentBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
+<div ng-if="!showCovers" class="book-view" ng-repeat="book in allBooks | orderBy:'title'" ng-click="downloadBook(book.id)">
     <p class="book-title">{{book.title}}</p>
     <p class="book-publisher">{{book.publisher}}</p>
 </div>

@@ -1,16 +1,35 @@
-<html>
+<html ng-app="lib4AllApp" ng-controller="MainController">
     <head>
-        <title>Library for All Portal</title>
+        <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100" rel="stylesheet"> -->
+        <style>
+            @import url('https://fonts.googleapis.com/css?family=Work+Sans:200');
+        </style>
+        <title>{{main.title || "Library for All Portal"}}</title>
+
+
+        <script type="text/javascript" src="node_modules/angular/angular.js"></script>
+        <script src="mainController.js"></script>
+        <script src="libraryController.js"></script>
+        <script src="catalogController.js"></script>
+        <script src="node_modules/angular-resource/angular-resource.js"></script>
+        <script src="node_modules/angular-route/angular-route.js"></script>
+        <link rel="stylesheet" type="text/css" href="main.css" />
+
     </head>
 
-    <body>
+    <body class="body">
 
-        <a href="books.html">Books</a>
+    	<div style="position: relative;">
+            <h2 class="title">Library For All</h2>
+            <input class="search" type="text" placeholder="Search" ng-model="filter" ng-change="filterBooks()">
+            <button class="button" ng-click="changeView()">{{buttonTitle}}</button>
+        </div>
 
-        <!-- remove this to stop automatic redirect -->
-        <script type="text/javascript">
-        	window.location = "/main.html"
-        </script>
+        <div class="container">
+            <md-content flex id="content">
+                <div ng-view></div>
+            </md-content>
+        </div>
 
     </body>
-</html>

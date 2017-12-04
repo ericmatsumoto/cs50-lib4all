@@ -12,7 +12,7 @@ lib4AllApp.config(['$routeProvider',
                 controller: 'LibraryController'
             }).
             otherwise({
-                redirectTo: '/main'
+                redirectTo: '/library'
             });
     }]);
 
@@ -20,31 +20,25 @@ lib4AllApp.config(['$routeProvider',
 lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
     function ($scope, $resource, $location) {
 
-        var downloadedBooksResource = $resource('/downloaded_books');
-        $scope.downloadedBooks = downloadedBooksResource.query();
-
+        var allBooksResource = $resource("/books");
+        $scope.allBooks = allBooksResource.query();
 
         $scope.showCovers = true;
-
-        var resource = $resource("/books");
-        $scope.allBooks = resource.query();
-        $scope.currentBooks = $scope.allBooks;
-        $scope.filter = "";
-        $scope.coverPrefix = "https://books.libraryforall.org/assets/";
-        var showingAllBooks = true;
-        $scope.buttonTitle = "My Downloaded Books";
 
         $scope.downloadBook = function(id) {
         	var downloadResource = $resource("/download/" + id);
         	var res = downloadResource.get();
 
             var getBookResource = $resource("/books/" + id);
-            var book = getBookResource.get();
-            $scope.downloadedBooks.push(book);
-
+            var book = getBookResource.get();   
 
         	console.log("Just downloaded book with id of " + id);
-        }
+        }   
+
+        $scope.filter = "";
+        $scope.coverPrefix = "https://books.libraryforall.org/assets/";
+        var showingAllBooks = true;
+        $scope.buttonTitle = "My Downloaded Books";
 
         $scope.filterBooks = function() {
         	$scope.currentBooks = $scope.books.filter(function(book) {
@@ -64,17 +58,14 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
         $scope.changeView = function() {
             console.log("switched views supposedly")
             if(showingAllBooks) {
-                $scope.currentBooks = $scope.downloadedBooks
                 showingAllBooks = false;
                 $scope.buttonTitle = "Full Catalog";
                 $location.path('/library');
             } else {
-                $scope.currentBooks = $scope.allBooks
                 showingAllBooks = true;
                 $scope.buttonTitle = "My Downloaded Books";
                 $location.path('/catalog');
             }
-
         }
 
     }]);
