@@ -26,7 +26,22 @@ app.get('/books', function(request, response) {
       response.status(500).end(JSON.stringify({error: "SQL error occured while getting books"}));
       return;
     }
-    response.send(result);
+    var books = JSON.parse(JSON.stringify(result));
+    fs.readdir(config.get('localPrefix'), (err, files) => {
+      if (err) {
+        response.status(500).end(JSON.stringify({error: "Error reading downloaded books"}));
+        return;
+      }
+      var ids = files.map(function (fileName) {
+        return path.parse(fileName).name;
+      });
+      books.filter(function (book) {
+        if (ids.includes(String(book.id))) {
+          book.downloaded = true;
+        }
+      });
+      response.send(books);
+    });
   });
 });
 

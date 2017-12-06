@@ -78,7 +78,7 @@
 	text-align: center;
 }
 
-.cover-add-icon {
+.cover-hover-icon {
 		width: 100%;
 		background: #d3d3d3;
 		/*border: solid 1px red;*/
@@ -92,8 +92,12 @@
     position: absolute;
 }
 
-.cover-add-icon:hover {
+.cover-hover-icon:hover {
 	cursor: pointer;
+	opacity: 0.65;
+}
+
+.show {
 	opacity: 0.65;
 }
 
