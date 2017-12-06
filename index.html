@@ -20,10 +20,15 @@
 
     <body class="body">
 
-    	<div style="position: relative;">
+    	<div class="toolbar">
             <h2 class="title">Library For All</h2>
-            <input class="search" type="text" placeholder="Search" ng-model="filter">
-            <button class="button" ng-click="changeView()">{{buttonTitle}}</button>
+            <span class="filler"></span>
+            <div class="switch-wrap">
+                <button class="switch-view-button" ng-click="changeView()">{{buttonTitle}}</button>
+            </div>
+            <div class="search-wrap">
+                <input class="search" type="text" placeholder="Search" ng-model="filter">
+            </div>
         </div>
 
         <div class="container">

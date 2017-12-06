@@ -1,27 +1,7 @@
 .body {
 	font-family: Geneva;
-}
-
-.title {
-	font-family: 'Lobster', cursive;
-	margin: auto;
-	/*position: absolute;*/
-	text-align: center;
-	font-size: 3em;
-}
-
-.search {
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	height: 25px;
-	margin: auto;
-	border-radius: 8px;
-	border: 1px solid lightgrey;
-	outline: none;
-	font-size: 1.05em;
-	padding: 0 3px;
+	padding: 0;
+	margin: 0;
 }
 
 .book-view {
@@ -106,4 +86,64 @@
 	height: 85%;
 	/*-webkit-clip-path: polygon(0 0, 100% 0%, 100% 83%, 0 83%);
 	clip-path: polygon(0 0, 100% 0%, 100% 83%, 0 83%);*/
+}
+
+.toolbar {
+	background-color: lightblue;
+	display: flex;
+}
+
+.title {
+	font-family: 'Lobster', cursive;
+	margin: auto;
+	display: inline-block;
+	padding: 5px;
+	font-size: 3em;
+}
+
+.filler {
+	flex: 1 1 auto;
+}
+
+.search-wrap {
+	position: relative;
+	display: inline-block;
+	width: 200px;
+	margin-right: 8px;
+}
+
+.search {
+	height: 25px;
+	border-radius: 8px;
+	border: 1px solid lightgrey;
+	outline: none;
+	font-size: 1.05em;
+	padding: 0 3px;
+	position: absolute;
+	top: 0; bottom: 0;
+	margin: auto;
+}
+
+.switch-wrap {
+	position: relative;
+	display: inline-block;
+	width: 150px;
+	margin-right: 8px;
+}
+
+.switch-view-button {
+	position: absolute;
+	top: 0; bottom: 0; left: 0; right: 0;
+	margin: auto;
+	height: 25px;
+	width: 150px;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	color: grey;
+	cursor: pointer;
+}
+
+.switch-view-button:hover {
+	color: darkgrey;
 }
