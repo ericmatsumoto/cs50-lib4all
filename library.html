@@ -7,7 +7,7 @@
 </div>
 <div ng-if="!showCovers">
     <div ng-if="showBook(book)" class="book-view" ng-repeat="book in downloadedBooks | orderBy:'title'" ng-click="deleteBook(book.id)">
-        <p class="book-title">{{book.title}}</p>
-        <p class="book-publisher">{{book.publisher}}</p>
+        <span class="book-title">{{book.title}}</span>
+        <span class="book-publisher">{{book.publisher}}</span>
     </div>
 </div>

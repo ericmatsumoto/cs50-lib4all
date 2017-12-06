@@ -58,7 +58,7 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
                 $location.path('/library');
             } else {
                 showingAllBooks = true;
-                $scope.buttonTitle = "My Downloaded Books";
+                $scope.buttonTitle = "My Books";
                 $location.path('/catalog');
             }
         }

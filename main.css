@@ -6,15 +6,16 @@
 
 .book-view {
 	list-style-type: none;
+	border: 1px solid lightgrey;
 	margin: 6px;
 	padding: 6px;
 	border-radius: 6px;
-	background-color: lightblue;
+	background-color: white;
 }
 
 .book-view:hover {
 	cursor: pointer;
-	background-color: #bfefff;
+	background-color: #ebf6f9;
 }
 
 .book-title {
@@ -127,8 +128,8 @@
 .switch-wrap {
 	position: relative;
 	display: inline-block;
-	width: 150px;
-	margin-right: 8px;
+	width: 120px;
+	/*margin-right: 4px;*/
 }
 
 .search-wrap input {
@@ -137,10 +138,10 @@
 
 .switch-view-button {
 	position: absolute;
-	top: 0; bottom: 0; left: 0; right: 0;
+	font-size: 16px;
+	top: 0; bottom: 0;
 	margin: auto;
 	height: 25px;
-	width: 150px;
 	background-color: transparent;
 	border: none;
 	outline: none;
