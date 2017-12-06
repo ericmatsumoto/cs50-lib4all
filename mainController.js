@@ -24,21 +24,22 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
         $scope.allBooks = allBooksResource.query();
 
         $scope.showCovers = true;
+        $scope.buttonTitle2 = "List View";
 
         $scope.downloadBook = function(id) {
         	var downloadResource = $resource("/download/" + id);
         	var res = downloadResource.get();
 
             var getBookResource = $resource("/books/" + id);
-            var book = getBookResource.get();   
+            var book = getBookResource.get();
 
         	console.log("Just downloaded book with id of " + id);
-        }   
+        }
 
         $scope.filter = "";
         $scope.coverPrefix = "https://books.libraryforall.org/assets/";
-        var showingAllBooks = true;
-        $scope.buttonTitle = "My Downloaded Books";
+        var showingAllBooks = false;
+        $scope.buttonTitle = "Full Catalog";
 
         $scope.filterBooks = function() {
         	$scope.currentBooks = $scope.books.filter(function(book) {
@@ -56,7 +57,6 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
         }
 
         $scope.changeView = function() {
-            console.log("switched views supposedly")
             if(showingAllBooks) {
                 showingAllBooks = false;
                 $scope.buttonTitle = "Full Catalog";
@@ -68,4 +68,14 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
             }
         }
 
+        $scope.changeLayout = function() {
+            console.log("something")
+            if($scope.showCovers) {
+              $scope.showCovers = false;
+              $scope.buttonTitle2  = "Covers View";
+            } else {
+              $scope.showCovers = true;
+              $scope.buttonTitle2  = "List View";
+            }
+        }
     }]);

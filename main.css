@@ -91,7 +91,7 @@
 
 .title {
 	font-family: 'Lobster', cursive;
-	margin: auto;
+	margin: 10px 20px;
 	display: inline-block;
 	padding: 5px;
 	font-size: 3em;
@@ -109,8 +109,8 @@
 }
 
 .search {
-	height: 25px;
-	border-radius: 8px;
+	height: 30px;
+	/*border-radius: 8px;*/
 	border: 1px solid lightgrey;
 	outline: none;
 	font-size: 1.05em;
@@ -125,6 +125,10 @@
 	display: inline-block;
 	width: 150px;
 	margin-right: 8px;
+}
+
+.search-wrap input {
+	padding: 5px;
 }
 
 .switch-view-button {
