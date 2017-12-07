@@ -130,6 +130,10 @@ app.get('/books/by_title/:title', function(request, response) {
 
 app.get('/downloaded_books', function(request, response) {
   fs.readdir(config.get('localPrefix'), (err, files) => {
+    if (err) {
+      response.status(500).end(JSON.stringify({error: "Could not read local directory"}));
+      return;
+    }
     var ids = files.map(function (fileName) {
       return path.parse(fileName).name;
     });
@@ -146,4 +150,34 @@ app.get('/downloaded_books', function(request, response) {
       response.send(result);
     });
   })
+});
+
+app.delete('/downloaded_books/:id', function (request, response) {
+  fs.readdir(config.get('localPrefix'), (err, files) => {
+    if (err) {
+      response.status(500).end(JSON.stringify({error: "Could not read local directory"}));
+      return;
+    }
+    var ids = files.map(function (fileName) {
+      return path.parse(fileName).name;
+    });
+    var index = -1;
+    for (var i = 0; i < ids.length; i++) {
+      if (ids[i] == request.params.id) {
+        index = i;
+        break;
+      }
+    }
+    if (index == -1) {
+      response.status(400).end(JSON.stringify({error: "Could not find downloaded book with provided id"}));
+      return;
+    }
+    fs.unlink(config.get('localPrefix') + files[i], function (error) {
+      if (error) {
+        response.status(400).end(JSON.stringify({error: "Could not delete book"}));
+        return;
+      }
+      response.send({status: "Book deleted"});
+    })
+  });
 });
