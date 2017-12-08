@@ -18,23 +18,34 @@
 
     </head>
 
-    <body class="body">
+    <body class="body" ng-click="dropdownVisible=false;">
 
     	<div class="toolbar">
             <h2 class="title">Library For All</h2>
             <span class="filler"></span>
             <!-- available-downloaded -->
-            <div class="switch-wrap">
+            <!-- <div class="switch-wrap">
                 <label class="switch-view-button"><input type="checkbox" ng-click="changeView()">{{buttonTitle}}</label>
-                <!-- <button class="switch-view-button" ng-click="changeView()">{{buttonTitle}}</button> -->
-            </div>
+                <button class="switch-view-button" ng-click="changeView()">{{buttonTitle}}</button>
+            </div> -->
             <!-- covers-list -->
-            <div class="switch-wrap">
-                <!-- <button class="switch-view-button" ng-click="changeLayout()">{{buttonTitle2}}</button> -->
-            </div>
+            <!-- <div class="switch-wrap">
+                <button class="switch-view-button" ng-click="changeLayout()">{{buttonTitle2}}</button>
+            </div> -->
             <!-- search -->
             <div class="search-wrap">
                 <input class="search" type="text" placeholder="Search" ng-model="filter">
+            </div>
+            <div class="settings">
+                <img class="icon" src="settings.png" ng-click="dropdownVisible=!dropdownVisible; stopPropogation($event);">
+                <div class="dropdown" ng-hide="!dropdownVisible">
+                    <div class="switch-wrap dropdown-item">
+                        <label><input type="checkbox" ng-click="changeView(); stopPropogation($event);">{{buttonTitle}}</label>
+                    </div>
+                    <div class="switch-wrap dropdown-item">
+                        <label><input type="checkbox" ng-click="changeLayout(); stopPropogation($event);">{{buttonTitle2}}</label>
+                    </div>
+                </div>
             </div>
         </div>
 

@@ -113,6 +113,12 @@
 	margin-right: 8px;
 }
 
+.settings {
+	position: relative;
+	display: inline-block;
+	width: 30px;
+}
+
 .search {
 	height: 30px;
 	/*border-radius: 8px;*/
@@ -147,6 +153,32 @@
 	outline: none;
 	color: grey;
 	cursor: pointer;
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	margin: auto;
+	top: 0; bottom: 0; right: 10px;
+	cursor: pointer;
+}
+
+.dropdown {
+	z-index: 1;
+	width: 120px;
+	height: 75px;
+	position: absolute;
+	left: -100px;
+	bottom: -50px;
+	background-color: lightgrey;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.dropdown-item {
+	padding: 8px 0;
+	border-top: 1px solid #f0f0f0;
 }
 
 .switch-view-button:hover {

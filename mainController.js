@@ -25,6 +25,7 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
 
         $scope.showCovers = true;
         $scope.buttonTitle2 = "List View";
+        $scope.dropdownVisible = false
 
         $scope.downloadBook = function(id) {
         	var downloadResource = $resource("/download/" + id);
@@ -64,7 +65,6 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
         }
 
         $scope.changeLayout = function() {
-            console.log("something")
             if($scope.showCovers) {
               $scope.showCovers = false;
               //$scope.buttonTitle2  = "Covers View";
@@ -72,5 +72,9 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
               $scope.showCovers = true;
               //$scope.buttonTitle2  = "List View";
             }
+        }
+
+        $scope.stopPropogation = function(e) {
+            e.stopImmediatePropagation();
         }
     }]);
