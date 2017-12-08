@@ -90,6 +90,7 @@
 }
 
 .toolbar {
+	border-bottom: 4px solid #8ac7db;
 	background-color: lightblue;
 	display: flex;
 }
@@ -123,8 +124,9 @@
 	height: 30px;
 	/*border-radius: 8px;*/
 	border: 1px solid lightgrey;
+	border-radius: 2px;
 	outline: none;
-	font-size: 1.05em;
+	font-size: 1em;
 	padding: 0 3px;
 	position: absolute;
 	top: 0; bottom: 0;
@@ -165,6 +167,7 @@
 }
 
 .dropdown {
+	box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.75);
 	z-index: 1;
 	width: 120px;
 	height: 75px;
@@ -172,13 +175,17 @@
 	left: -100px;
 	bottom: -50px;
 	background-color: lightgrey;
+	border: 1px solid  #b3b3b3;
 	border-radius: 2px;
 	overflow: hidden;
 }
 
 .dropdown-item {
 	padding: 8px 0;
-	border-top: 1px solid #f0f0f0;
+}
+
+.last-dropdown-item {
+	border-top: 1px solid  #b3b3b3;
 }
 
 .switch-view-button:hover {
