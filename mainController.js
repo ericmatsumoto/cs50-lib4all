@@ -54,11 +54,11 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
         $scope.changeView = function() {
             if(showingAllBooks) {
                 showingAllBooks = false;
-                $scope.buttonTitle = "Full Catalog";
+                //$scope.buttonTitle = "Full Catalog";
                 $location.path('/library');
             } else {
                 showingAllBooks = true;
-                $scope.buttonTitle = "My Books";
+                //$scope.buttonTitle = "My Books";
                 $location.path('/catalog');
             }
         }
@@ -67,10 +67,10 @@ lib4AllApp.controller('MainController', ['$scope', '$resource', '$location',
             console.log("something")
             if($scope.showCovers) {
               $scope.showCovers = false;
-              $scope.buttonTitle2  = "Covers View";
+              //$scope.buttonTitle2  = "Covers View";
             } else {
               $scope.showCovers = true;
-              $scope.buttonTitle2  = "List View";
+              //$scope.buttonTitle2  = "List View";
             }
         }
     }]);
